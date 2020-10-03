@@ -14,7 +14,6 @@ export default function configureRouter(router) {
 		const oAuth2Client = newOAuth2Client();
 		try {
 			const { tokens } = await oAuth2Client.getToken(code);
-			console.log(tokens);
 			if (tokens.refresh_token) {
 				const encryptedToken = encrypt(tokens.refresh_token);
 				ok({ token: encryptedToken });

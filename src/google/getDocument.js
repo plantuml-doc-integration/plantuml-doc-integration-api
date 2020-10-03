@@ -1,11 +1,16 @@
 import googleapis from 'googleapis';
+import parseDocument from './parseDocument.js';
 const { google } = googleapis;
 
 export default async function getDocumentAsync(id, auth) {
 	const docs = google.docs({ version: 'v1', auth: auth });
 	try {
 		const document = await docs.documents.get({ documentId: id });
-		return document;
+		if (document && document.data) {
+			return parseDocument(document.data);
+		} else {
+			throw { errorCode: "DOC_INVALID", message: "Invalid document", status: 404 };
+		}
 	} catch (err) {
 		if (err.response && err.response.data && err.response.data.error) {
 			const errorData = err.response.data.error;
