@@ -20,7 +20,6 @@ api.use(morgan('combined'));
 
 api.use(cors({
 	origin: [
-		"localhost",
 		"https://plantdoc.herokuapp.com"
 	]
 }));
