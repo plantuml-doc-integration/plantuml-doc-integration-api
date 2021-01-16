@@ -13,6 +13,9 @@ import response from './util/response.js';
 
 const api = express();
 
+const API_PREFIX = "/api";
+const getRouteString = (route) => `${API_PREFIX}${route}`;
+
 api.use(morgan('combined'));
 
 api.use(cors());
@@ -28,9 +31,9 @@ api.use(methodOverride((req) => {
 		return method;
 	}
 }));
-api.use('/echo', routingEcho);
-api.use('/auth', routingAuth);
-api.use('/docs', routingDocs);
+api.use(getRouteString('/echo'), routingEcho);
+api.use(getRouteString('/auth'), routingAuth);
+api.use(getRouteString('/docs'), routingDocs);
 
 //Not Found
 const routerNotFound = express.Router();
