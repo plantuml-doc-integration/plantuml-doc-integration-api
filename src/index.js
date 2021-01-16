@@ -18,7 +18,12 @@ const getRouteString = (route) => `${API_PREFIX}${route}`;
 
 api.use(morgan('combined'));
 
-api.use(cors());
+api.use(cors({
+	origin: [
+		"localhost",
+		"https://plantdoc.herokuapp.com"
+	]
+}));
 api.use(bodyParser.json());
 api.use(bodyParser.urlencoded({ extended: true }));
 
